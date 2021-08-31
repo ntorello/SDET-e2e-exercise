@@ -9,7 +9,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import java.util.concurrent.TimeUnit;
 
-public class RemoveItemTest {
+public class CheckItemTest {
   WebDriver driver;
 
   @Before
@@ -21,22 +21,26 @@ public class RemoveItemTest {
   }
 
   @Test
-  public void removeTodoItem() {
+  public void checkTodoItem() {
     //Create object of HomePage Class
     HomePage home = new HomePage(driver);
 
     //Add item
     home.addTodo("Look at new todo item");
-    driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+    driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
     //Check if item was added
     Assert.assertTrue(home.isItemAdded("Look at new todo item"));
 
-    //Remove item
-    home.removeTodo();
+    //Check item
+    home.checkTodo();
+    driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
-    //Check if item was removed
-    Assert.assertTrue(home.isItemRemoved("Look at new todo item"));
+    //Check if item is checked
+    Assert.assertTrue(home.isItemChecked());
+
+    //Cleanup
+    home.removeTodo();
 
   }
 

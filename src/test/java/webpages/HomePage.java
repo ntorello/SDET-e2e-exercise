@@ -32,6 +32,12 @@ public class HomePage {
   @FindBy(className = "destroy")
   private WebElement deleteButton;
 
+  @FindBy(className = "toggle")
+  private WebElement checkbox;
+
+  @FindBy(css = ".todo-list li.completed label")
+  private WebElement checkedTodoItem;
+
   //Constructor
   public HomePage(WebDriver driver){
     this.driver=driver;
@@ -63,6 +69,22 @@ public class HomePage {
 
   public boolean isItemRemoved(String item) {
     return !todoList.getText().toString().contains(item);
+  }
+
+  public void checkTodo() {
+    checkbox.click();
+  }
+
+  public boolean isItemChecked() {
+    String color = checkedTodoItem.getCssValue("color");
+    System.out.println(color);
+    String textDecoration = checkedTodoItem.getCssValue("text-decoration");
+    System.out.println(textDecoration);
+    if (color.equals("rgba(81, 81, 81, 1)") && textDecoration.contains("line-through")) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
 }
