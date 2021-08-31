@@ -1,11 +1,15 @@
 package webpages;
 
+import java.util.List;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -37,6 +41,11 @@ public class HomePage {
 
   @FindBy(css = ".todo-list li.completed label")
   private WebElement checkedTodoItem;
+
+  @FindAll({
+      @FindBy(className = "todo")
+  })
+  private List<WebElement> todoItems;
 
   //Constructor
   public HomePage(WebDriver driver){
@@ -85,6 +94,16 @@ public class HomePage {
     } else {
       return false;
     }
+  }
+
+  public Integer getListSize() {
+    Dimension size = todoList.getSize();
+    return size.height;
+  }
+
+  public boolean isOrderRetained(String item1, String item2) {
+    return todoItems.get(0).getText().toString().contains(item1) &&
+        todoItems.get(1).getText().toString().contains(item2);
   }
 
 }
