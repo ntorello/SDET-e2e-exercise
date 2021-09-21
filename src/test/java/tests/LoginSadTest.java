@@ -2,7 +2,6 @@ package tests;
 
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
-import webpages.SignupPage;
 import webpages.LoginPage;
 import org.junit.After;
 import org.junit.Assert;
