@@ -9,8 +9,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.FindBys;
-import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -89,11 +87,25 @@ public class HomePage {
     System.out.println(color);
     String textDecoration = checkedTodoItem.getCssValue("text-decoration");
     System.out.println(textDecoration);
-    if (color.equals("rgba(81, 81, 81, 1)") && textDecoration.contains("line-through")) {
+    if ((color.equals("rgba(81, 81, 81, 1)") || color.equals("rgba(77, 77, 77, 1)") || color.equals("rgba(87, 87, 87, 1)"))
+        && textDecoration.contains("line-through")) {
       return true;
     } else {
       return false;
     }
+  }
+
+  public boolean isItemClickable() {
+    boolean noError = true;
+    Actions actions = new Actions(driver);
+    actions.doubleClick(todoItem).build().perform();
+    WebDriverWait wait = new WebDriverWait(driver, waitTime);
+    try {
+      todoItem.findElement(By.className("todo-edit"));
+    } catch (Exception e) {
+      noError = false;
+    }
+    return noError;
   }
 
   public Integer getListSize() {

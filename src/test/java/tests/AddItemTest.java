@@ -18,6 +18,7 @@ public class AddItemTest {
     System.setProperty("webdriver.chrome.driver","C:/Users/ntorello/Code/chromedriver_win32/chromedriver.exe");
     driver = new ChromeDriver();
     driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
   }
 
   @Test
@@ -30,10 +31,13 @@ public class AddItemTest {
     driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
 
     //Check if item was added
-    Assert.assertTrue(home.isItemAdded("Look at new todo item"));
+    boolean isItemAdded = home.isItemAdded("Look at new todo item");
 
     //Cleanup
     home.removeTodo();
+
+    //Assert boolean
+    Assert.assertTrue(isItemAdded);
 
   }
 

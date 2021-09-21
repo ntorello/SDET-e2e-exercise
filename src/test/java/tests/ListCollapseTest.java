@@ -30,7 +30,7 @@ public class ListCollapseTest {
     driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
 
     //Check if item was added
-    Assert.assertTrue(home.isItemAdded("ONE"));
+    boolean isItemAdded = home.isItemAdded("ONE");
 
     //Add item 2
     home.addTodo("TWO");
@@ -48,16 +48,21 @@ public class ListCollapseTest {
     driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
 
     //Check that list size is smaller
-    Assert.assertTrue(size > home.getListSize());
+    boolean isListSmaller = size > home.getListSize();
 
     //Check that order is preserved
-    Assert.assertTrue(home.isOrderRetained("TWO","THREE"));
+    boolean isOrderPreserved = home.isOrderRetained("TWO","THREE");
 
 
     //Cleanup
     home.removeTodo();
     driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
     home.removeTodo();
+
+    //Assert booleans
+    Assert.assertTrue(isItemAdded);
+    Assert.assertTrue(isListSmaller);
+    Assert.assertTrue(isOrderPreserved);
 
   }
 

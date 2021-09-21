@@ -1,6 +1,6 @@
 package tests;
 
-import webpages.HomePage;
+import webpages.SignupPage;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -9,7 +9,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import java.util.concurrent.TimeUnit;
 
-public class RemoveItemTest {
+public class SignupCheckboxTest {
   WebDriver driver;
 
   @Before
@@ -21,23 +21,16 @@ public class RemoveItemTest {
   }
 
   @Test
-  public void removeTodoItem() {
-    //Create object of HomePage Class
-    HomePage home = new HomePage(driver);
+  public void checkTodoItem() {
+    //Create object of page class
+    SignupPage signup = new SignupPage(driver);
 
-    //Add item
-    home.addTodo("Look at new todo item");
+    //Check item
+    signup.checkCheckbox();
     driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
 
-    //Check if item was added
-    boolean isItemAdded = home.isItemAdded("Look at new todo item");
-
-    //Remove item
-    home.removeTodo();
-
-    //Assert booleans
-    Assert.assertTrue(isItemAdded);
-    Assert.assertTrue(home.isItemRemoved("Look at new todo item"));
+    //Check if item is checked
+    Assert.assertTrue(signup.isCheckboxChecked());
 
   }
 

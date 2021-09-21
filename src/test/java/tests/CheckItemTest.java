@@ -27,20 +27,24 @@ public class CheckItemTest {
 
     //Add item
     home.addTodo("Look at new todo item");
-    driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+    driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
 
     //Check if item was added
-    Assert.assertTrue(home.isItemAdded("Look at new todo item"));
+    boolean isItemAdded = home.isItemAdded("Look at new todo item");
 
     //Check item
     home.checkTodo();
-    driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+    driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
 
     //Check if item is checked
-    Assert.assertTrue(home.isItemChecked());
+    boolean isItemChecked = home.isItemChecked();
 
     //Cleanup
     home.removeTodo();
+
+    //Assert booleans
+    Assert.assertTrue(isItemAdded);
+    Assert.assertTrue(isItemChecked);
 
   }
 
